@@ -5,19 +5,22 @@
       "name":     "client",
       "image":    "pxinghao/multi-client",
       "hostname": "client",
-      "essential": false
+      "essential": false,
+      "memory":    128
     },
     {
       "name":      "server",
       "image":     "pxinghao/multi-server",
       "hostname":  "api",
-      "essential": false
+      "essential": false,
+      "memory":    128
     },
     {
       "name":      "worker",
       "image":     "pxinghao/multi-worker",
       "hostname":  "worker",
-      "essential": false
+      "essential": false,
+      "memory":    128
     },
     {
       "name":      "nginx",
@@ -42,7 +45,8 @@
           "containerName": "client",
           "condition": "START"
         }
-      ]
+      ],
+      "memory":    128
     }
   ]
 }
