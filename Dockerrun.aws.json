@@ -1,0 +1,48 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name":     "client",
+      "image":    "pxinghao/multi-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name":      "server",
+      "image":     "pxinghao/multi-server",
+      "hostname":  "api",
+      "essential": false
+    },
+    {
+      "name":      "worker",
+      "image":     "pxinghao/multi-worker",
+      "hostname":  "worker",
+      "essential": false
+    },
+    {
+      "name":      "nginx",
+      "image":     "pxinghao/multi-nginx",
+      "hostname":  "nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": [
+        "client", "server"
+      ],
+      "dependsOn": [
+        {
+          "containerName": "server",
+          "condition": "START"
+        },
+        {
+          "containerName": "client",
+          "condition": "START"
+        }
+      ]
+    }
+  ]
+}
