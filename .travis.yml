@@ -23,3 +23,17 @@ after_success:
   - docker push pxinghao/multi-nginx
   - docker push pxinghao/multi-server
   - docker push pxinghao/multi-worker
+
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  region: "ap-southeast-1"
+  app: "multi-docker"
+  env: "MultiDocker-env"
+  bucket-name: "elasticbeanstalk-ap-southeast-1-943926308797"
+  bucket-path: "docker-multi"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  
